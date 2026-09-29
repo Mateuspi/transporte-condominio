@@ -41,7 +41,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 3. Cabeçalho Principal e Selo de Responsabilidade
+# 3. Exibição da Foto do Motorista
+col_img1, col_img2, col_img3 = st.columns([1, 2, 1])
+with col_img2:
+    try:
+        st.image("motorista.jpg", use_container_width=True)
+    except:
+        pass
+
+# 4. Cabeçalho Principal e Selo de Responsabilidade
 st.markdown("""
 <div class="profile-card">
     <h2>🚘 MateusDrive VIP</h2>
@@ -50,10 +58,10 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# 4. Mensagem de Confiança do Motorista
+# 5. Mensagem de Confiança do Motorista
 st.info("💡 **Compromisso & Segurança:** Trabalho com total responsabilidade, respeito e pontualidade. Veículo revisado (Prisma Sedan 4P com ar-condicionado) e opção de entregas ágeis de moto.")
 
-# 5. Apresentação das Modalidades de Serviços
+# 6. Apresentação das Modalidades de Serviços
 st.subheader("🛠️ Nossos Serviços")
 
 col1, col2 = st.columns(2)
@@ -62,7 +70,7 @@ with col1:
     st.markdown("""
     <div class="service-card">
         <h4>🚌 Transporte Escolar / Atividades</h4>
-        <p>Levar e buscar crianças em escolas e cursos no condomínio.</p>
+        <p>Levar e buscar crianças em escolas e cursos com total segurança.</p>
         <div class="service-price">Planos Mensais ou Avulsos</div>
     </div>
     """, unsafe_allow_html=True)
@@ -70,7 +78,7 @@ with col1:
     st.markdown("""
     <div class="service-card">
         <h4>🪩 Festas, Eventos & Baladas</h4>
-        <p>Leva e traz seguro para jovens e adultos em festas, shows e confraternizações.</p>
+        <p>Leva e traz seguro para jovens e adultos em festas, shows e eventos.</p>
         <div class="service-price">Valores A Combinar</div>
     </div>
     """, unsafe_allow_html=True)
@@ -87,7 +95,7 @@ with col2:
     st.markdown("""
     <div class="service-card">
         <h4>👵 Acompanhamento de Idosos</h4>
-        <p>Consultas médicas, exames, laboratórios e ida ao banco com paciência e apoio.</p>
+        <p>Consultas médicas, exames, laboratórios e ida ao banco com apoio.</p>
         <div class="service-price">Valores A Combinar</div>
     </div>
     """, unsafe_allow_html=True)
@@ -95,7 +103,7 @@ with col2:
     st.markdown("""
     <div class="service-card">
         <h4>🏥 Apoio Hospitalar / Pernoite</h4>
-        <p>Acompanhamento de turnos, esperas e altas médicas com total suporte.</p>
+        <p>Acompanhamento de turnos, esperas e altas médicas com suporte.</p>
         <div class="service-price">Valores A Combinar</div>
     </div>
     """, unsafe_allow_html=True)
@@ -110,7 +118,7 @@ with col2:
 
 st.markdown("---")
 
-# 6. Formulário Unificado de Solicitação
+# 7. Formulário Unificado de Solicitação
 st.subheader("📅 Solicitar Orçamento / Agendar Serviço")
 
 with st.form(key="solicitacao_form"):
@@ -121,9 +129,9 @@ with st.form(key="solicitacao_form"):
         "Selecione o Serviço Desejado:",
         [
             "🚌 Transporte Escolar / Atividades Infantis",
-            "🪩 Festas, Baladas, Shows (Leva e Traz de Jovens/Adultos - A Combinar)",
-            "👵 Transporte com carro / Acompanhamento de Idosos (Consultas, Banco, Exames - A Combinar)",
-            "🛵 Serviços/ Entregas Rápidas, neste caso utilizo moto (Documentos, Farmácia, Mercado)",
+            "🪩 Festas, Baladas, Shows e Eventos (Leva e Traz de Jovens/Adultos - A Combinar)",
+            "👵 Transporte / Acompanhamento de Idosos (Consultas, Banco, Exames - A Combinar)",
+            "🛵 Serviço de Motoboy / Entregas Rápidas (Documentos, Farmácia, Mercado)",
             "🏥 Acompanhamento Hospitalar / Pernoite / Altas (A Combinar)",
             "🚘 Outro Plano Personalizado / Corrida Avulsa (Detalhar Abaixo)"
         ]
@@ -132,16 +140,15 @@ with st.form(key="solicitacao_form"):
     data_horario = st.text_input("Data e Horário Pretendido:", placeholder="Ex: Sábado às 23:30 / Terça às 14:00")
     
     detalhes = st.text_area(
-        "Observações e Pedidos Especiais (Ajustamos conforme sua necessidade):",
-        placeholder="Ex: Preciso buscar meus filhos na festa às 03h da manhã no local X / Acompanhar minha mãe no hospital durante a tarde / Levar pacote para o cartório."
+        "Observações e Pedidos Especiais:",
+        placeholder="Ex: Preciso buscar meus filhos na festa às 03h da manhã / Acompanhar minha mãe no hospital durante a tarde"
     )
     
-    # Seu número de WhatsApp cadastrado
     SEU_NUMERO_WHATSAPP = "5535999400824"
 
     submit_button = st.form_submit_button(label="📱 Enviar Solicitação para o Mateus")
 
-# 7. Lógica de Envio para o WhatsApp
+# 8. Lógica de Envio para o WhatsApp
 if submit_button:
     if not nome_cliente or not telefone_cliente or not detalhes:
         st.error("Por favor, preencha o seu Nome, Telefone e as Observações/Detalhes do pedido.")
@@ -150,7 +157,7 @@ if submit_button:
             f"*Olá Mateus! Vi o aplicativo MateusDrive e gostaria de agendar/cotar um serviço.*\n\n"
             f"👤 *Cliente:* {nome_cliente}\n"
             f"📞 *Contato:* {telefone_cliente}\n"
-            f"🛠️ *Serviço:* {categoria_servico}\n"
+            f"🛠️️ *Serviço:* {categoria_servico}\n"
             f"⏰ *Data/Horário:* {data_horario if data_horario else 'A combinar'}\n"
             f"📝 *Observações/Detalhes:* {detalhes}\n\n"
             f"Aguardo sua confirmação e valor!"
@@ -171,10 +178,10 @@ if submit_button:
             </a>
         ''', unsafe_allow_html=True)
 
-# 8. Rodapé Profissional
+# 9. Rodapé Profissional
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #666; font-size: 12px;">
-    🛡️ <b>MateusDrive VIP:</b> Segurança, pontualidade e sigilo. Veículo  higienizado, ar-condicionado e suporte direto via WhatsApp.
+    🛡️ <b>MateusDrive VIP:</b> Segurança, pontualidade e sigilo. Veículo Prisma Sedan higienizado, ar-condicionado e suporte direto via WhatsApp.
 </div>
 """, unsafe_allow_html=True)
